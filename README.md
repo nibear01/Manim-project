@@ -1,4 +1,4 @@
-# 🎬 Imran’s Lab Intro Video Generator
+# Project Documentation
 
 A professional **animated intro video pipeline** for **Imran’s Lab**, built with **Manim**, **gTTS**, and **FFmpeg**.  
 This project combines **custom animations**, **narrated voiceovers**, and **automated video/audio merging** into one polished output.
