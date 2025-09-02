@@ -1,4 +1,5 @@
 from manim import *
+import numpy as np
 
 # Constants
 FRAME_RATE = 30
@@ -34,6 +35,17 @@ def add_particles(scene, n=15, radius=0.05, color=LIGHT_BLUE):
     scene.play(*[FadeIn(c, scale=0.5, run_time=1) for c in particles], run_time=2)
     return particles
 
+def floating_animation(mob, amplitude=0.2, frequency=1.0):
+    """Adds a gentle floating animation to a mobject."""
+    def float_update(mob, dt):
+        mob.shift(np.array([0, amplitude * np.sin(frequency * mob.time * TAU), 0]))
+    mob.time = 0
+    def updater(mob, dt):
+        mob.time += dt
+        float_update(mob, dt)
+    mob.add_updater(updater)
+    return mob
+
 # ------------------------------
 # Scene Classes
 # ------------------------------
@@ -61,7 +73,15 @@ class OpeningBranding(Scene):
         # Animate logo and slogan
         self.play(MoveToTarget(logo, run_time=2), FadeIn(logo))
         self.play(FadeIn(slogan, shift=UP), run_time=2)
+
+        # Add floating effect
+        floating_animation(logo, amplitude=0.1, frequency=0.5)
+        floating_animation(slogan, amplitude=0.05, frequency=0.8)
+
+        # Wait for duration
         self.wait(DURATION_BRANDING)
+
+        # Exit
         self.play(FadeOut(logo), FadeOut(slogan), FadeOut(particles), FadeOut(bg_rect))
 
 class PersonalIntroduction(Scene):
@@ -78,28 +98,40 @@ class PersonalIntroduction(Scene):
         # Animated texts
         intro_text = animated_text("Hello! I'm Naved Abrar Nibir", color=DARK_BLUE, scale=1.3)
         fun_fact = animated_text("Fun fact: I love building web projects and exploring AI", color=DARK_GRAY, scale=0.8)
+        uni_text = animated_text("I'm studying at BRAC University", color=DARK_BLUE, scale=0.8)
         excitement = animated_text("Excited to join Imran's Lab!", color=LIGHT_BLUE, scale=1.1)
 
         fun_fact.next_to(intro_text, DOWN)
-        excitement.next_to(fun_fact, DOWN)
+        uni_text.next_to(fun_fact, DOWN)
+        excitement.next_to(uni_text, DOWN)
 
         # Entrance animations
         self.play(FadeIn(intro_text, shift=UP*0.5, run_time=1.5))
         self.play(FadeIn(fun_fact, shift=RIGHT*0.5, run_time=1.5))
-        self.play(FadeIn(excitement, shift=LEFT*0.5, run_time=1.5))
+        self.play(FadeIn(uni_text, shift=LEFT*0.5, run_time=1.5))
+        self.play(FadeIn(excitement, shift=UP*0.5, run_time=1.5))
 
         # Subtle rotation for background circles
         self.play(Rotate(bg_circles, angle=PI/12, run_time=DURATION_INTRO, rate_func=linear))
 
-        # Exit animations
+        # Floating animation for texts
+        floating_animation(intro_text, amplitude=0.05, frequency=0.5)
+        floating_animation(fun_fact, amplitude=0.03, frequency=0.7)
+        floating_animation(uni_text, amplitude=0.03, frequency=0.6)
+        floating_animation(excitement, amplitude=0.05, frequency=0.8)
+
+        # Wait
         self.wait(DURATION_INTRO)
+
+        # Exit animations
         self.play(
             intro_text.animate.scale(0.8).shift(UP*2),
             fun_fact.animate.shift(DOWN*2),
+            uni_text.animate.shift(DOWN*2),
             excitement.animate.shift(UP*2),
             FadeOut(bg_circles)
         )
-        self.play(FadeOut(intro_text), FadeOut(fun_fact), FadeOut(excitement))
+        self.play(FadeOut(intro_text), FadeOut(fun_fact), FadeOut(uni_text), FadeOut(excitement))
 
 class ClosingBranding(Scene):
     def construct(self):
@@ -112,7 +144,7 @@ class ClosingBranding(Scene):
         # Thank you text
         thank_you = animated_text("Thank you for watching!", color=DARK_BLUE, scale=1.5)
         thank_you.set_color_by_gradient(LIGHT_BLUE, DARK_BLUE)
-        slogan = animated_text("Stay curious and keep learning", color=DARK_GRAY, scale=1.0)
+        slogan = animated_text("Stay curious and keep learning with Imran's Lab", color=DARK_GRAY, scale=0.8)
         slogan.next_to(thank_you, DOWN)
 
         # Background floating circles
@@ -122,9 +154,13 @@ class ClosingBranding(Scene):
         self.play(FadeIn(thank_you, shift=UP*0.5, run_time=2))
         self.play(Write(slogan, run_time=2))
 
-        # Subtle rotation animation for background shapes
-        self.play(Rotate(particles, angle=PI/6, run_time=4))
+        # Floating animation
+        floating_animation(thank_you, amplitude=0.05, frequency=0.5)
+        floating_animation(slogan, amplitude=0.03, frequency=0.7)
+        floating_animation(particles, amplitude=0.02, frequency=0.6)
 
-        # Exit animations
+        # Wait
         self.wait(DURATION_BRANDING)
+
+        # Exit
         self.play(FadeOut(thank_you), FadeOut(slogan), FadeOut(bg_rect), FadeOut(particles))

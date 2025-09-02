@@ -1,4 +1,4 @@
-# Imranslab Introduction Video
+# Project Documentation
 
 This project is my first assignment for the Imranslab internship, created using [Manim](https://www.manim.community/).  
 It introduces myself with a short branded animation, following Imranslab’s style and colors.  
