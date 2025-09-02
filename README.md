@@ -1,157 +1,174 @@
-#Project Documentation
+# 🎬 Imran’s Lab Intro Video Generator
 
+A professional **animated intro video pipeline** for **Imran’s Lab**, built with **Manim**, **gTTS**, and **FFmpeg**.  
+This project combines **custom animations**, **narrated voiceovers**, and **automated video/audio merging** into one polished output.
 
-This project produces a professional animated intro video for Imran’s Lab.
-It combines custom Manim animations, narrated voiceovers, and video/audio merging into a polished final product.
+---
 
-The workflow is divided into three main stages:
+## ✨ Features
+- 🎨 Custom animations created with **Manim**  
+- 🗣️ Text-to-speech narration using **gTTS**  
+- 🎼 Automatic syncing of audio & video with **FFmpeg**  
+- 📂 Modular design (easy to update narration, logo, or animations)  
+- 🎥 Final high-quality **MP4 intro video**  
 
-Animation Rendering with Manim (intro_video.py)
+---
 
-Voiceover Generation using gTTS (generate_voiceover.py)
+## 🛠️ Tools & Technologies Used
+- **Python 3.13.3**  
+- **[Manim](https://www.manim.community/)** (Mathematical Animation Engine)  
+- **[gTTS](https://pypi.org/project/gTTS/)** (Google Text-to-Speech)  
+- **[FFmpeg](https://ffmpeg.org/)** (Video & audio processing)  
+- **NumPy** (for particle/random animations)  
 
-Video + Audio Merging with FFmpeg (combine_videos.py)
+---
 
-🎬 Storyboard
-Scene 1: Opening Branding
+## 🎬 Storyboard
 
-Background: Light gradient rectangle with floating particles.
+### 🎥 Scene 1: Opening Branding
+- **Background**: Light gradient rectangle with floating particles  
+- **Elements**: Lab logo + slogan  
+- **Animations**:  
+  - Logo appears with scaling & rotation  
+  - Slogan fades in with gradient effect  
+  - Floating motion for logo & text  
+- **Narration**:  
+  *“Welcome to Imran’s Lab, inspiring minds, building futures...”*  
 
-Elements: Lab logo + slogan.
+---
 
-Animations:
+### 🎥 Scene 2: Personal Introduction
+- **Background**: Expanding light-blue circles  
+- **Elements**:  
+  - “Hello! I’m Naved Abrar Nibir”  
+  - “Fun fact: I love building web projects and exploring AI”  
+  - “I’m studying at BRAC University”  
+  - “Excited to join Imran’s Lab!”  
+- **Animations**:  
+  - Each text fades in with directional movement  
+  - Floating animations for each text  
+  - Rotating background circles  
+- **Narration**: Personal introduction + highlights  
 
-Logo appears with smooth scaling & rotation.
+---
 
-Slogan fades in with a gradient effect.
+### 🎥 Scene 3: Closing Branding
+- **Background**: Gradient with floating circles  
+- **Elements**:  
+  - “Thank you for watching!”  
+  - “Stay curious and keep learning with Imran’s Lab”  
+- **Animations**:  
+  - Thank-you text fades in with scaling  
+  - Closing slogan written on screen  
+  - Gentle floating until fade-out  
+- **Narration**: Motivational closing line  
 
-Subtle floating motion applied to logo & text.
-
-Narration: “Welcome to Imran’s Lab, inspiring minds, building futures...”
-
-Scene 2: Personal Introduction
-
-Background: Expanding light-blue circles.
-
-Elements:
-
-“Hello! I’m Naved Abrar Nibir”
-
-“Fun fact: I love building web projects and exploring AI”
-
-“I’m studying at BRAC University”
-
-“Excited to join Imran’s Lab!”
-
-Animations:
-
-Each text line fades in with directional movement.
-
-Floating animations for each text element.
-
-Background circles rotate slowly for dynamism.
-
-Narration: Introduction + personal highlights.
-
-Scene 3: Closing Branding
-
-Background: Subtle gradient with animated floating circles.
-
-Elements:
-
-“Thank you for watching!”
-
-“Stay curious and keep learning with Imran’s Lab”
-
-Animations:
-
-Thank-you text fades in with scaling.
-
-Closing slogan is written on screen.
-
-Both texts float gently until fade-out.
-
-Narration: Closing motivational line.
+---
 
 ## 📂 Project Structure
-
 📂 ImransLabIntroVideo
-│── intro_video.py          # Manim animations
-│── generate_voiceover.py   # TTS generation with gTTS
-│── combine_videos.py       # FFmpeg merging + final video
-│── narration_intro.txt     # Narration script (3 sections)
+│── intro_video.py # Manim animations
+│── generate_voiceover.py # TTS generation with gTTS
+│── combine_videos.py # FFmpeg merging + final video
+│── narration_intro.txt # Narration script (3 sections)
 │
 📂 assets
-│   ├── images
-│   │    └── imranslab_logo.png
-│   └── audio
-│        ├── voiceover_opening.mp3
-│        ├── voiceover_intro.mp3
-│        └── voiceover_closing.mp3
+│ ├── images
+│ │ └── imranslab_logo.png
+│ └── audio
+│ ├── voiceover_opening.mp3
+│ ├── voiceover_intro.mp3
+│ └── voiceover_closing.mp3
 │
 📂 media (created by Manim during rendering)
 📂 outputs
-    ├── videos
-    │    └── final_intro_video.mp4
-    └── temp (temporary concat + merge files)
+├── videos
+│ └── final_intro_video.mp4
+└── temp (temporary concat + merge files)
 
 
+---
 
-Rendering Instructions:
-1. Install Dependencies
+## ⚙️ Rendering Instructions
+
+### 1️⃣ Install Dependencies
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate venv
+# Windows:
+venv\Scripts\activate
+# Mac/Linux:
+source venv/bin/activate
+
+# Install requirements
 pip install manim gTTS
-sudo apt install ffmpeg   # required for video/audio merging
+sudo apt install ffmpeg ```  # required for merging
 
-2. Generate Animations
+2️⃣ Generate Animations
 manim -pqh intro_video.py OpeningBranding
 manim -pqh intro_video.py PersonalIntroduction
 manim -pqh intro_video.py ClosingBranding
 
 
-Outputs will be in media/videos/intro_video/1080p60/
+👉 Outputs will be saved in:
+media/videos/intro_video/1080p60/
 
-3. Generate Voiceovers
+3️⃣ Generate Voiceovers
 python generate_voiceover.py
 
 
-This will create assets/audio/voiceover_*.mp3
+👉 Creates:
 
-4. Merge Video + Audio
+assets/audio/voiceover_opening.mp3
+
+assets/audio/voiceover_intro.mp3
+
+assets/audio/voiceover_closing.mp3
+
+4️⃣ Merge Video + Audio
 python combine_videos.py
 
 
-Final video saved to: outputs/videos/final_intro_video.mp4
+👉 Final video saved to:
+outputs/videos/final_intro_video.mp4
+
+👉 Final video saved to:
+outputs/videos/final_intro_video.mp4
 
 
 ⚡ Challenges & Solutions
-1. Syncing Animations with Voiceover
+1. ⏱️ Syncing Animations with Voiceover
 
-Problem: Text animations had fixed wait times, but narration varied in length.
+Problem: Text animations had fixed wait times, narration varied
 
-Solution: Voiceover splitting ensured each narration matched its scene. FFmpeg’s -shortest flag syncs duration automatically.
+Solution: Split narration into 3 scenes + used FFmpeg’s -shortest flag
 
-2. Making Animations Look Professional
+2. 🎨 Making Animations Look Professional
 
-Problem: Default fade-ins looked static.
+Problem: Default fade-ins felt flat
 
-Solution: Added particle effects, floating animations (using Manim updaters), and gradient text.
+Solution: Added particles, floating effects, and gradient text
 
-3. Managing Multiple Files
+3. 📂 Managing Multiple Files
 
-Problem: Keeping track of 3 scenes + 3 voiceovers + final merge.
+Problem: Tracking 3 scenes + 3 voiceovers + merges
 
-Solution: Automated merging pipeline with a temporary folder and concat file.
+Solution: Automated pipeline with temp folder & concat file
 
-4. Performance & Rendering Speed
+4. 🖥️ Performance & Rendering Speed
 
-Problem: Manim high-quality renders are slow.
+Problem: High-quality Manim renders are slow
 
-Solution: Used -pqh (preview quality high) for testing, and -pqh/-qh for final render depending on requirement.
+Solution: Used -pqh (preview high) for testing, -qh for final renders
 
 🎯 Final Deliverable
 
-A high-quality MP4 intro video (outputs/videos/final_intro_video.mp4)
+✅ High-quality MP4 intro video: outputs/videos/final_intro_video.mp4
 
-Includes smooth animations, synced narration, and branding consistency.
+✅ Smooth animations synced with narration
 
-Modular design allows easy modification of narration text, logo, or animations.
+✅ Consistent branding & modular design
+
+✅ Easy to update narration, logo, or animation styles
