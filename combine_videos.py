@@ -8,6 +8,12 @@ video_paths = [
     "media/videos/intro_video/1080p60/ClosingBranding.mp4"
 ]
 
+video_paths2 = [
+    "media/videos/intro_video/480p15/OpeningBranding.mp4",
+    "media/videos/intro_video/480p15/PersonalIntroduction.mp4",
+    "media/videos/intro_video/480p15/ClosingBranding.mp4"
+]
+
 audio_paths = [
     "assets/audio/voiceover_opening.mp3",
     "assets/audio/voiceover_intro.mp3",
@@ -19,7 +25,7 @@ temp_folder = "outputs/temp"
 os.makedirs(temp_folder, exist_ok=True)
 
 merged_videos = []
-for i, (video, audio) in enumerate(zip(video_paths, audio_paths)):
+for i, (video, audio) in enumerate(zip(video_paths2, audio_paths)):
     output_file = os.path.join(temp_folder, f"scene_{i+1}_merged.mp4")
     merged_videos.append(output_file)
 
